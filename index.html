@@ -25,7 +25,7 @@
 	src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.js"></script>
 
 <script type="text/javascript"
-	src="file:///home/gustavo/turma/scripts/papaparse.min.js"></script>
+	src="scripts/papaparse.min.js"></script>
 
 </head>
 <body>
@@ -55,7 +55,7 @@
 		});
 		
 		// Parse local CSV file
-		Papa.parse("file:///home/gustavo/turma/lista.csv", {
+		Papa.parse("lista.csv", {
 			complete: function(results) {
 				console.log("Finished:", results.data);
 			}
