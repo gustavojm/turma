@@ -9,9 +9,11 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.css" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.css" />
+	href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css" />
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -24,21 +26,22 @@
 <script type="text/javascript"
 	src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.js"></script>
 
-<script type="text/javascript"
-	src="scripts/papaparse.min.js"></script>
+<script type="text/javascript" src="scripts/papaparse.min.js"></script>
 
 </head>
 <body>
 
 	<header id="header"> </header>
-	<table id="my-table">
+	<table id="my-table" class="table table-striped dt-responsive nowrap"
+		style="width: 100%">
 		<thead>
 			<tr>
-				<th>Producto</th>
+				<th data-priority="1">Producto</th>
 				<th>Precio x1</th>
-				<th>Precio</th>
+				<th data-priority="2">Precio</th>
 				<th>Marca</th>
 				<th>Categoría</th>
+				<th>Grupo</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,19 +51,49 @@
 </body>
 
 <script type="text/javascript">
-	$(function()
-	{
-		$('#my-table').DataTable({
-			responsive : true
-		});
-		
+	$(function() {
+
 		// Parse local CSV file
-		Papa.parse("lista.csv", {
-			complete: function(results) {
-				console.log("Finished:", results.data);
-			}
-		})	
+		Papa
+				.parse(
+						"lista.csv",
+						{
+							download : true,
+							complete : function(results) {
+								console.log("Finished:", results.data);
+								$('#my-table')
+										.DataTable(
+												{
+													responsive : true,
+													data : results.data,
+													language : {
+														"decimal" : "",
+														"emptyTable" : "No hay datos en la tabla",
+														"info" : "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+														"infoEmpty" : "Mostrando 0 a 0 de 0 entradas",
+														"infoFiltered" : "(filtrado de _MAX_ entradas totales)",
+														"infoPostFix" : "",
+														"thousands" : ",",
+														"lengthMenu" : "Mostrar _MENU_ entradas",
+														"loadingRecords" : "Cargando...",
+														"processing" : "",
+														"search" : "Buscar:",
+														"zeroRecords" : "No se encontraron registros",
+														"paginate" : {
+															"first" : "Primero",
+															"last" : "Último",
+															"next" : "Siguiente",
+															"previous" : "Previo"
+														},
+														"aria" : {
+															"sortAscending" : ": ordenar ascendente",
+															"sortDescending" : ": ordenar descendente"
+														}
+													}
+												});
+
+							}
+						})
 
 	});
-	
 </script>
