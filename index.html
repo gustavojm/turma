@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Turma</title>
+
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.css" />
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.js"></script>
+
+<script type="text/javascript"
+	src="file:///home/gustavo/turma/scripts/papaparse.min.js"></script>
+
+</head>
+<body>
+
+	<header id="header"> </header>
+	<table id="my-table">
+		<thead>
+			<tr>
+				<th>Producto</th>
+				<th>Precio x1</th>
+				<th>Precio</th>
+				<th>Marca</th>
+				<th>Categoría</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+
+</body>
+
+<script type="text/javascript">
+	$(function()
+	{
+		$('#my-table').DataTable({
+			responsive : true
+		});
+		
+		// Parse local CSV file
+		Papa.parse("file:///home/gustavo/turma/lista.csv", {
+			complete: function(results) {
+				console.log("Finished:", results.data);
+			}
+		})	
+
+	});
+	
+</script>
