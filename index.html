@@ -42,6 +42,7 @@
 				<th>Marca</th>
 				<th>Categoría</th>
 				<th>Grupo</th>
+				<th>Buscar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -62,6 +63,11 @@
                             header : false,
 							skipEmptyLines: 'greedy',
 							complete : function(results) {
+							modifiedresults = [];
+								$.each(results.data, function(id, row) {
+									row[row.length] = "<a href=\"https://www.google.com/search?q=" + row[0].replace(/\s+/g, '+').toLowerCase() + "+" + row[3] + "\" target=\"_blank\">Buscar</a>";
+									console.log(row);
+								});
 								console.log("Finished:", results.data);
 								$('#my-table')
 										.DataTable(
